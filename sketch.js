@@ -3,6 +3,8 @@ function preload(){
 }
 
 function setup() {
+  createCanvas(500,500);
+  background(200);
   // put setup code here
 }
 
