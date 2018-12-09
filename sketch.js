@@ -4,9 +4,9 @@ var capture;
 
 
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(windowWidth, windowHeight);
   capture = createCapture(VIDEO);
-	capture.size(500, 375);
+	capture.size(640, 480);
 	capture.hide();
   background(255);
 
@@ -24,30 +24,31 @@ function draw() {
   var threshold = 0.1;
   if (volume > threshold) {
     stroke(255);
-    strokeWeight(random(1,4));
+    strokeWeight(random(1,3));
     fill(0);
-    ellipse(random(width), random(height), volume*40, volume*40);
+    ellipse(random(width), random(height), volume*40);
   }
 
   //webcam changes filter
 	var myImage = capture.loadPixels();
   imageMode(CENTER);
 	image(myImage, width/2, height/2, 600, 600);
-    if (volume>0 && volume<0.15) {
-  	filter(THRESHOLD);
-  	fill(random(255),random(255),random(255));
-  	ellipse(random(width),random(height),volume*40, volume*40);
-  }  else if (volume>0.15 && volume<.2) {
-  	filter(POSTERIZE,4);
-  	fill(random(255),random(255),random(255));
-  	ellipse(random(width),random(height),volume*40, volume*40);
-  }  else if (volume>0.2 && volume<0.4) {
-  	filter(INVERT);
+  if (volume>0 && volume<0.15) {
+    filter(THRESHOLD);
     fill(random(255),random(255),random(255));
-    ellipse(random(width),random(height),volume*40, volume*40);
+    ellipse(random(width),random(height),volume*40);
+  }  else if (volume>0.15 && volume<.2) {
+    filter(POSTERIZE,4);
+    fill(random(255),random(255),random(255));
+    ellipse(random(width),random(height),volume*40);
+  }  else if (volume>0.2 && volume<0.4) {
+    filter(INVERT);
+    fill(random(255),random(255),random(255));
+    ellipse(random(width),random(height),volume*40);
   } else if (volume>0.4 && volume<0.6) {
-    	filter(GRAY);
-      fill(random(255),random(255),random(255));
-      ellipse(random(width),random(height),volume*40, volume*40);
-    	}
+    filter(GRAY);
+    fill(random(255),random(255),random(255));
+    ellipse(random(width),random(height),volume*40);
+  }
+
 }
